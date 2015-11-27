@@ -31,10 +31,21 @@ class LibCloudStorage(Storage):
                 'LIBCLOUD_PROVIDERS %s not define or invalid' % provider_name)
         try:
             Driver = get_driver(self.provider['type'])
-            self.driver = Driver(
-                self.provider['user'],
-                self.provider['key'],
-                )
+            
+            user = self.provide.get('user', None)
+            key = self.provider.get('key', None)
+            
+            if provider_name == 'google' and not user:
+                self.driver = Driver(
+                    key,
+                    secret=self.provider.['secret'],
+                    project=self.provider.['project']
+                    )
+            else:
+                self.driver = Driver(
+                    user,
+                    key,
+                    )
         except Exception, e:
             raise ImproperlyConfigured(
                 "Unable to create libcloud driver type %s" % \
