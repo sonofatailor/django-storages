@@ -38,8 +38,8 @@ class LibCloudStorage(Storage):
             if provider_name == 'google' and not user:
                 self.driver = Driver(
                     key,
-                    secret=self.provider.['secret'],
-                    project=self.provider.['project']
+                    secret=self.provider['secret'],
+                    project=self.provider['project']
                     )
             else:
                 self.driver = Driver(
